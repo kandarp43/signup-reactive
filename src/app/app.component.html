@@ -12,8 +12,13 @@
               formControlName="firstname"
               [ngClass]="{ 'is-invalid': submitted && h.firstname.errors }"
             />
-            <div class="text-warning">
-              <div>First Name is required</div>
+            <div
+              *ngIf="h.firstname.touched && h.firstname.errors"
+              class="text-warning"
+            >
+              <div *ngIf="h.firstname.errors.required">
+                First Name is required
+              </div>
             </div>
           </div>
           <div class="form-group col-6">
@@ -24,8 +29,13 @@
               formControlName="lastname"
               [ngClass]="{ 'is-invalid': submitted && h.lastname.errors }"
             />
-            <div class="text-warning">
-              <div>Last Name is required</div>
+            <div
+              *ngIf="h.lastname.touched && h.lastname.errors"
+              class="text-warning"
+            >
+              <div *ngIf="h.lastname.errors.required">
+                Last Name is required
+              </div>
             </div>
           </div>
         </div>
@@ -37,15 +47,14 @@
             formControlName="email"
             [ngClass]="{ 'is-invalid': submitted && h.email.errors }"
           />
-          <div class="text-warning">
-            <div>Email is required</div>
-            <div>Email must be a valid email address</div>
+          <div *ngIf="h.email.touched && h.email.errors" class="text-warning">
+            <div *ngIf="h.email.errors.required">Email is required</div>
+            <div *ngIf="h.email.errors.email">
+              Email must be a valid email address
+            </div>
           </div>
         </div>
 
-        <ng-container>
-          <div class="text-danger">Value is required.</div>
-        </ng-container>
         <div class="form-row">
           <div class="form-group col">
             <label>Password</label>
