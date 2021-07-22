@@ -64,9 +64,14 @@
               formControlName="password"
               [ngClass]="{ 'is-invalid': submitted && h.password.errors }"
             />
-            <div class="text-warning">
-              <div>Password is required</div>
-              <div>Password must be at least 6 characters</div>
+            <div
+              *ngIf="h.password.touched && h.password.errors"
+              class="text-warning"
+            >
+              <div *ngIf="h.password.errors.required">Password is required</div>
+              <div *ngIf="h.password.errors.minlength">
+                Password must be at least 6 characters
+              </div>
             </div>
           </div>
           <div class="form-group col">
@@ -79,9 +84,16 @@
                 'is-invalid': submitted && h.confirmPassword.errors
               }"
             />
-            <div class="text-warning">
-              <div>Confirm Password is required</div>
-              <div>Passwords must match</div>
+            <div
+              *ngIf="h.confirmPassword.touched && h.confirmPassword.errors"
+              class="text-warning"
+            >
+              <div *ngIf="h.confirmPassword.errors.required">
+                Confirm Password is required
+              </div>
+              <div *ngIf="h.confirmPassword.errors.mustmatch">
+                Passwords must match
+              </div>
             </div>
           </div>
         </div>
@@ -96,15 +108,15 @@
           <label for="acceptTerms" class="form-check-label"
             >Accept Terms & Conditions</label
           >
-          <div class="text-warning">Accept Ts & Cs is required</div>
+          <div *ngIf="h.acceptTandC.errors" class="text-warning">
+            Accept Ts & Cs is required
+          </div>
         </div>
         <div class="text-center">
           <button class="btn btn-success btn-lg px-4 mr-3">Register</button>
           <button class="btn btn-warning" type="reset" (click)="onReset()">
             Reset
           </button>
-          <p class="text white">Value: {{ registerForm.value | json }}</p>
-          <p class="text white">Value: {{ registerForm.valid | json }}</p>
         </div>
       </form>
     </div>
