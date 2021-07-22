@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
       {
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
-        email: ['', Validators.required, Validators.email],
-        password: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
         acceptTandC: [false, Validators.requiredTrue],
       },
@@ -37,6 +37,10 @@ export class AppComponent implements OnInit {
     console.table(this.registerForm);
 
     alert('success SignUp \n' + JSON.stringify(this.registerForm.value));
+  }
+
+  get h() {
+    return this.registerForm.controls;
   }
 
   onReset() {
